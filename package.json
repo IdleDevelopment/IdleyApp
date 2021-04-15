@@ -1,0 +1,25 @@
+{
+  "name": "idleyapp",
+  "version": "1.0.0",
+  "description": "Idley.gg's Official App from Idle Development",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "idley",
+    "idle",
+    "idledev",
+    "free",
+    "hosting",
+    "hosting",
+    "app",
+    "servers",
+    "minecraft"
+  ],
+  "author": "Skyfallen, Inc.",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^12.0.4"
+  }
+}
