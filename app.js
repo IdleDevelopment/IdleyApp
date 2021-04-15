@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
+const expressServer = require("./express")
 var win
 
 function createWindow () {
@@ -29,6 +30,7 @@ function createWindow () {
 
 app.whenReady().then(() => {
   createWindow()
+  expressServer.init();
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
