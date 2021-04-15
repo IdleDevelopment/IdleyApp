@@ -22,6 +22,16 @@ ipc.on("auth", function(e,a){
 })
 
 })
+
+function loadPteroManagePage(server_id){
+
+    ipc.send("loadPtero",{
+        server_id:server_id,
+        userData: userData
+    })
+
+}
+
 function loadServerManagePage(server_id){
 
     const server = userData.servers.find(x => x.id === server_id);
@@ -91,7 +101,7 @@ function loadServerManagePage(server_id){
               </div>
             </div>
             <footer class="card-footer">
-              <a href="#" class="card-footer-item">Manage at Control Panel</a>
+              <a href="javascript:loadPteroManagePage('${server_id}')" class="card-footer-item">Manage at Control Panel</a>
             </footer>
           </div>
         </div>
