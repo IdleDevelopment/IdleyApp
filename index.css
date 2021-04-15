@@ -1,0 +1,9 @@
+.panel-bottom{
+
+    border: 1px solid #ededed;
+    position: absolute;
+    width: 100%;
+    background: white;
+    bottom: 0;
+
+}
