@@ -63,6 +63,45 @@ ipcMain.on('init',function(e,a){
 
 })
 
+ipcMain.on('back', function(e,a){
+
+    if(a == 'home'){
+        win.loadFile('index.html')
+    }
+
+})
+
+ipcMain.on('loadPtero', function(e,a){
+
+    let url = "https://my.idley.gg/api/createAutoLoginToken?access_token="+authToken;
+
+    let options = {json: true};
+
+    request(url, options, (error, res, body) => {
+        if (error) {
+            return  console.log(error)
+        };
+
+        if (!error && res.statusCode == 200) {
+            win.loadURL("https://control.idley.gg/auth/login?idle_ias="+body.token)
+            .then(function(){
+                win.loadURL("https://control.idley.gg/server/"+a.userData.servers.find(x => x.id === a.server_id).uuidShort)
+                .then(function(){
+                    win.webContents.executeJavaScript(`
+                        function goBackToMain(){
+                            const ipc = require('electron').ipcRenderer;
+
+                            ipc.send('back','home')
+                        }
+                        document.body.innerHTML = "<button style='height: 40px; width: 60px; border: none; border-radius: 10px; position:absolute; right: 20px; top: 20px; background: white; color:black;' onclick='goBackToMain()'>Back</button>"+document.body.innerHTML;
+                    `)
+                })
+            })
+        };
+    });
+
+})
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
