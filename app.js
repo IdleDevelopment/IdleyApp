@@ -93,7 +93,7 @@ ipcMain.on('loadPtero', function(e,a){
 
                             ipc.send('back','home')
                         }
-                        document.body.innerHTML = "<button style='height: 40px; width: 60px; border: none; border-radius: 10px; position:absolute; right: 20px; top: 20px; background: white; color:black;' onclick='goBackToMain()'>Back</button>"+document.body.innerHTML;
+                        document.body.innerHTML = "<div style='position:absolute; right: 20px; top: 20px;'><button style='height: 40px; width: 60px; border: none; border-radius: 10px; background: white; color:black;' onclick='goBackToMain()'>Back</button></div>"+document.body.innerHTML;
                     `)
                 })
             })
