@@ -63,29 +63,29 @@ function loadServerManagePage(server_id){
         </div>
         <form class="box" style="width: 50%; margin-left: 5%; display: inline-block;">
             <div class="field">
-                <label class="label">Change Server Name</label>
+                <label class="label">Change Server CPU</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="New Server Name" value="${server.name}">
+                    <input class="input" id="newcpu" type="text" placeholder="New CPU" value="${server.cpu}">
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Change Memory</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="New Memory" value="${server.memory}">
+                    <input class="input" id="newmemory" type="text" placeholder="New Memory" value="${server.memory}">
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Change Server Disk</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="New Server Disk" value="${server.disk}">
+                    <input class="input" id="newdisk" type="text" placeholder="New Server Disk" value="${server.disk}">
                 </div>
             </div>
 
             <div class="field is-grouped">
                 <div class="control">
-                    <button class="button is-link">Submit</button>
+                    <button class="button is-link" type="button" onclick="updateServerSpecs('${server_id}')">Submit</button>
                 </div>
             </div>
         </form>
@@ -107,5 +107,38 @@ function loadServerManagePage(server_id){
         </div>
     `)
     console.log(server)
+
+}
+
+function updateServerSpecs(server_id){
+
+    var http = new XMLHttpRequest();
+    var url = 'https://my.idley.gg/api/updateServer?access_token='+authToken;
+    var params = `server_id=${server_id}&cpu=${$("#newcpu").val()}&disk=${$("#newdisk").val()}&memory=${$("#newmemory").val()}`;
+    http.open('POST', url, true);
+
+    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            var resp = JSON.parse(http.responseText)
+            if(resp.status === "OK"){
+                alert("Server successfully updated.")
+                $.getJSON('https://my.idley.gg/api/getUserServers?access_token='+authToken, function(data) {
+                    userData = data;
+                    if(data.error === undefined){
+                        loadServerManagePage(server_id)
+                    } else {
+                        if(data.error === "invalid_auth"){
+                            alert("You have to login to the app again.")
+                        }
+                    }
+                });
+            } else {
+                alert(resp.error)
+            }
+        }
+    }
+    http.send(params);
 
 }
