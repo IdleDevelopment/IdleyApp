@@ -23,6 +23,38 @@
   "devDependencies": {
     "electron": "^12.0.4"
   },
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "npm",
+        "appCopyright": "Skyfallen, Inc.",
+        "ignore": [
+          ".+.test.js",
+          ".*.env",
+          ".eslintrc",
+          ".gitignore",
+          "README.md",
+          "yarn.lock",
+          ".jshintrc",
+          ".babelrc"
+        ]
+      },
+      "electronWinstallerConfig": {
+        "name": "Idley App",
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "IdleDevelopment",
+        "name": "IdleyApp"
+      }
+    },
+  },
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.1",
