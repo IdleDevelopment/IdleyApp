@@ -1,3 +1,2 @@
 # IdleyApp
-Official app for idley.gg from Idle Development made with electron.
-## coming soon.
+This app has been discontinued as Idley ceased operations in late 2021.
